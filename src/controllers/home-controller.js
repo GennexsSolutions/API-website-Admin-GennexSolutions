@@ -1,5 +1,7 @@
 const homeModel = require('../models/home');
 
+const homeModel = require('../models/home');
+
 exports.insertHome = async (req, res) => {
     try {
         const { description } = req.body;
@@ -8,9 +10,11 @@ exports.insertHome = async (req, res) => {
             return res.status(400).json({ success: false, message: 'No file uploaded' });
         }
 
+        const imagePath = `/public/images/${req.file.filename}`;
+
         const data = new homeModel({
             description: description,
-            image: req.file.path
+            image: imagePath
         });
 
         await data.save();
@@ -20,6 +24,7 @@ exports.insertHome = async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 };
+
 
 
 exports.getData = async (req, res) => {
