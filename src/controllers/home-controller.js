@@ -1,7 +1,5 @@
 const homeModel = require('../models/home');
 
-const homeModel = require('../models/home');
-
 exports.insertHome = async (req, res) => {
     try {
         const { description } = req.body;
