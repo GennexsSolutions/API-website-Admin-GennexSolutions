@@ -25,12 +25,12 @@ const uploadimage = multer({
     storage: storage,
     fileFilter: fileFilter,
     limits: {
-        fileSize: 1024 * 1024 * 5
+        fileSize: 1024 * 1024 * 5 // 5MB file size limit
     }
 });
 
 /* Routes */
-router.post('/insertHome', uploadimage.single('image'), homeController.insertHome);
+router.post('/insertHome', uploadimage.single('images'), homeController.insertHome); // Allow up to 10 images
 router.get('/getData', homeController.getData);
 router.delete('/delete/:id', homeController.deleteDatabyId);
 
