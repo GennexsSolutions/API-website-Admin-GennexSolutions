@@ -30,7 +30,7 @@ const uploadimage = multer({
 });
 
 /* Routes */
-router.post('/insertHome', uploadimage.single('images'), homeController.insertHome); // Allow up to 10 images
+router.post('/insertHome', uploadimage.single('image'), homeController.insertHome); // Allow up to 10 images
 router.get('/getData', homeController.getData);
 router.delete('/delete/:id', homeController.deleteDatabyId);
 

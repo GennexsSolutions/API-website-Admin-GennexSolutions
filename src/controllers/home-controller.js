@@ -3,9 +3,6 @@ const homeModel = require('../models/home');
 exports.insertHome = async (req, res) => {
     try {
         const { description } = req.body;
-        
-      
-
         const data = new homeModel({
             description: description,
             image: req.file.path
