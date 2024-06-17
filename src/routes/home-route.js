@@ -6,7 +6,7 @@ const homeController = require('../controllers/home-controller');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/images')
+      cb(null, './image')
     },
     filename: function (req, file, cb) {
       cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
