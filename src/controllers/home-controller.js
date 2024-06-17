@@ -1,5 +1,7 @@
 const homeModel = require('../models/home');
 
+
+
 exports.insertHome = async (req, res) => {
     try {
         const { description } = req.body;
@@ -20,7 +22,7 @@ exports.insertHome = async (req, res) => {
 exports.getData = async (req, res) => {
     try {
         const data = await homeModel.find();
-        res.status(200).json({ success: true, message: 'data fetched successfully', data: data, },);
+        res.status(200).json({ success: true, message: 'data fetched successfully', data: data, });
     } catch (error) {
         console.log(error)
     }
