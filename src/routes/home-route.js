@@ -1,10 +1,8 @@
-const fs = require('fs');
+
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const path = require('path');
 const homeController = require('../controllers/home-controller');
- // Import Firebase bucket
 
 const storage = multer.memoryStorage();  // Use memory storage for multer
 

@@ -1,20 +1,47 @@
 const teamsModels = require('../models/teams');
+const { bucket } = require('../config/firebaseConfig');
+const path = require('path');
 
 exports.insertTeams = async (req, res) => {
     try {
-        const { name, position } = req.body;
-        const data = new teamsModels({
-            name: name,
-            position: position,
-            image: req.file.path
-        })
-        if (!data) {
-            res.status(404).json({ success: false, message: 'data is not found', },);
-        }
-        await data.save();
-        res.status(201).json({ success: true, message: 'data inserted successfully', data: data, },);
+        // Ensure request body has description and name
+        const { name, position, } = req.body;
+        const file = req.file;
+
+        const fileName = `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`;
+
+        // Upload to Firebase
+        const blob = bucket.file(fileName);
+        const blobStream = blob.createWriteStream({
+            resumable: false,
+            metadata: {
+                contentType: file.mimetype,
+            },
+        });
+
+        blobStream.on('error', (err) => {
+            console.log("Error uploading to Firebase:", err);
+            res.status(500).json({ success: false, message: 'Internal server error' });
+        });
+
+        blobStream.on('finish', async () => {
+            const publicUrl = `${blob.name}`;
+            const data = new teamsModels({
+
+                name: name,
+                position: position,
+                image: publicUrl
+            });
+
+            await data.save();
+            res.status(201).json({ success: true, message: 'Data inserted successfully', data: data });
+        });
+
+        blobStream.end(file.buffer);
+
     } catch (error) {
-        console.log("error==" + error)
+        console.log("Error:", error);
+        res.status(500).json({ success: false, message: 'Internal server error' });
     }
 }
 
