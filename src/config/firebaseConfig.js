@@ -1,5 +1,5 @@
 const admin = require('firebase-admin');
-require('dotenv').config()
+
 const serviceAccount = require('./gennex-solutions-firebase-adminsdk-qga4k-ff6578f3ce.json');
 
 admin.initializeApp({
