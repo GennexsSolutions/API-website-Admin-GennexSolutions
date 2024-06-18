@@ -4,7 +4,7 @@ exports.insertHome = async (req, res) => {
         const { description } = req.body;
         const data = new homeModel({
             description: description,
-            image: req.file.filename  // Save only the file name
+            image: req.file.path  // Save only the file name
         });
 
         await data.save();
