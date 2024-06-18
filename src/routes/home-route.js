@@ -4,21 +4,9 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const homeController = require('../controllers/home-controller');
+ // Import Firebase bucket
 
-// Ensure the directory exists
-const uploadDir = './image';
-if (!fs.existsSync(uploadDir)){
-    fs.mkdirSync(uploadDir);
-}
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, uploadDir);
-    },
-    filename: function (req, file, cb) {
-        cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
-    }
-});
+const storage = multer.memoryStorage();  // Use memory storage for multer
 
 const fileFilter = (req, file, cb) => {
     if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {

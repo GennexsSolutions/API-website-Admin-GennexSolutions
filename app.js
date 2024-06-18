@@ -19,6 +19,8 @@ const serviceRouter = require('./src/routes/service-route');
 const projectRouter = require('./src/routes/project-route');
 const teamsRoute = require('./src/routes/teams-route');
 
+const imageRout = require('./src/controllers/controller');
+
 const app = express();
 connectDB();
 
@@ -39,5 +41,6 @@ app.use('/contact', contactRouter);
 app.use('/service', serviceRouter);
 app.use("/project", projectRouter);
 app.use('/teams', teamsRoute);
+app.use('/images', imageRout);
 
 module.exports = app;
