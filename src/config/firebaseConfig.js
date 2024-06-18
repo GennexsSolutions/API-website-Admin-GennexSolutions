@@ -1,9 +1,10 @@
 const admin = require('firebase-admin');
+require('dotenv').config()
 const serviceAccount = require('./gennex-solutions-firebase-adminsdk-qga4k-ff6578f3ce.json');
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: 'gennex-solutions.appspot.com'
+    storageBucket: process.env.StorageBucket
 });
 
 const bucket = admin.storage().bucket();
