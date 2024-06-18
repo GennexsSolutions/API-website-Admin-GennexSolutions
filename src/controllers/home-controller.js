@@ -1,13 +1,10 @@
 const homeModel = require('../models/home');
-
-
-
 exports.insertHome = async (req, res) => {
     try {
         const { description } = req.body;
         const data = new homeModel({
             description: description,
-            image: req.file.path
+            image: req.file.filename  // Save only the file name
         });
 
         await data.save();
