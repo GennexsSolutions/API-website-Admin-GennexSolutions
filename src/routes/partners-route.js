@@ -1,9 +1,9 @@
+
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const path = require('path');
-//import controller
-const teamsController = require('../controllers/teams-controller');
+const PartnersController = require('../controllers/partners-controller');
+
 const storage = multer.memoryStorage();  // Use memory storage for multer
 
 const fileFilter = (req, file, cb) => {
@@ -22,7 +22,7 @@ const uploadimage = multer({
     }
 });
 
-router.post('/insertTeams', uploadimage.single('image'), teamsController.insertTeams);
-router.get('/getData', teamsController.getData);
-router.delete('/delete/:id', teamsController.deleteDatabyId);
+/* Routes */
+router.post('/insertPartners', uploadimage.single('image'), PartnersController.insertPartners);
+router.get('/getData', PartnersController.getPartners);
 module.exports = router;
