@@ -25,5 +25,6 @@ const uploadimage = multer({
 /* Routes */
 router.post('/insertCustomers', uploadimage.single('image'), CustomersController.insertCustomers);
 router.get('/getData', CustomersController.getCustomers);
+router.delete('/delete/:id', CustomersController.deleteDatabyId);
 
 module.exports = router;
